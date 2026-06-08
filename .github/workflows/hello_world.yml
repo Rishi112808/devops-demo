@@ -1,0 +1,25 @@
+name: 01 - Hello World
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+
+  hello:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Say Hello
+        run: echo "Hello from GitHub Actions!"
+
+      - name: Show who triggered this
+        run: echo "Triggered by ${{ github.actor }}"
+
+      - name: Show the branch name
+        run: echo "Branch is ${{ github.ref_name }}"
+
+      - name: Show the date and time
+        run: date
