@@ -1,0 +1,29 @@
+name: CI Artifact Pipeline
+
+on:
+  push:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Generate Build Report
+        run: |
+          echo "===== BUILD REPORT =====" > report.txt
+          echo "Repository: ${{ github.repository }}" >> report.txt
+          echo "Triggered By: ${{ github.actor }}" >> report.txt
+          echo "Branch: ${{ github.ref_name }}" >> report.txt
+          echo "Generated On:" >> report.txt
+          date >> report.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-report
+          path: report.txt
